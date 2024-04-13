@@ -5,15 +5,17 @@ import App from './App';
 import type { Router as RemixRouter } from '@remix-run/router';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { loginRoutes } from './modules/login/routes/loginRoutes';
+import GlobalStyles from './global.style';
 
-const router: RemixRouter = createBrowserRouter([]);
+const router: RemixRouter = createBrowserRouter([...loginRoutes]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
   </React.StrictMode>
 );
 
