@@ -50,40 +50,11 @@ export const Image = styled.img`
   height: 500px;
 `;
 
-export const HeaderText = styled.h1`
-  font-size: 32px;
-  line-height: 1.0;
-  margin-bottom: 10px;
-`;
-
 export const LeftSide = styled.div` 
   width: 40%;
 `
 
 export const LeftSideContainer = styled.div`
-`
-
-export const LeftSideText = styled.p`
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: white;
-  line-height: 30px;
-
-`
-
-export const LeftSideTextBold = styled.p`
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: white;
-  font-weight: 900;
-  line-height: 30px;
-`
-
-export const LefSideTextDecoration = styled.span`
-  background-color: rgba(237, 109, 9, 1);
-  padding: 5px 10px;
-  border-radius: 100px;
-  font-weight: 900;
 `
 
 export const RightSide = styled.div`
@@ -112,11 +83,3 @@ export const RegisterForm = styled.form`
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
 `;
-
-// export const FormContainer = styled.div<{ isHidden: boolean }>`
-//   display: ${(props) => (props.isHidden ? 'none' : 'block')};
-
-//   @media (max-width: 768px) {
-//     display: block;
-//   }
-// `;
