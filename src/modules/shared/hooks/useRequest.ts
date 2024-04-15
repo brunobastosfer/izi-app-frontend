@@ -70,10 +70,35 @@ export const useRequest = () => {
     return resultData;
   }
 
-  const taskPutRequest = async <T>(url: string, data: any): Promise<T> => {
+  const taskPutRequest = async <T>(url: string, body: any): Promise<T> => {
     setLoading(true);
     const resultData = await axios({
-      method: 'get',
+      method: 'put',
+      url: "http://localhost:3002" + url,
+      data: body,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      Swal.fire({
+        title: 'Erro!',
+        text: error.response.data.message,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+    })
+
+    return resultData;
+  }
+
+  const taskDeleteRequest = async <T>(url: string): Promise<T> => {
+    setLoading(true);
+    const resultData = await axios({
+      method: 'delete',
       url: "http://localhost:3002" + url,
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -94,10 +119,38 @@ export const useRequest = () => {
     return resultData;
   }
 
+  const taskPostRequest = async <T>(url: string, body: any): Promise<T> => {
+    setLoading(true);
+    const resultData = await axios({
+      method: 'post',
+      url: 'http://localhost:3002/task/',
+      data: body,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      Swal.fire({
+        title: 'Erro!',
+        text: error.response.data.message === "No token provided" ? "Faça login novamente" : error.response.data.message,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+    })
+
+    return resultData;
+  }
+
   return {
     loading,
     getRequest,
     authRequest,
-    taskGetRequest
+    taskGetRequest,
+    taskPutRequest,
+    taskDeleteRequest,
+    taskPostRequest
   }
 }
