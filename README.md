@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+# Izi APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# frontend
 
-## Available Scripts
+## Descrição
+Este é um projeto frontend desenvolvido com React.js. Ele utiliza várias bibliotecas e ferramentas populares para criar uma aplicação web moderna e responsiva.
 
-In the project directory, you can run:
+## Dependências Principais
+
+- `@custom-react-hooks/use-window-size`: Hook personalizado para obter o tamanho da janela.
+- `@remix-run/router`: Roteador para navegação na aplicação.
+- `@testing-library/jest-dom`: Biblioteca de utilitários para testes Jest.
+- `@testing-library/react`: Biblioteca de utilitários para testes React.
+- `@testing-library/user-event`: Biblioteca para simular eventos do usuário nos testes.
+- `@types/jest`: Tipos para Jest.
+- `@types/node`: Tipos para Node.js.
+- `@types/react`: Tipos para React.
+- `@types/react-dom`: Tipos para ReactDOM.
+- `antd`: Biblioteca de componentes UI baseada em Ant Design.
+- `axios`: Cliente HTTP para fazer requisições AJAX.
+- `react`: Biblioteca principal do React.
+- `react-dom`: Renderizador do React para o DOM.
+- `react-router-dom`: Roteamento para aplicações React.
+- `react-scripts`: Conjunto de scripts para criar e executar um aplicativo React.
+- `styled-components`: Biblioteca para estilizar componentes React.
+- `sweetalert2`: Biblioteca para exibir modais bonitos.
+- `typescript`: Linguagem de programação TypeScript.
+- `web-vitals`: Biblioteca para medir e reportar métricas de desempenho do usuário.
+
+## Scripts
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Inicia o servidor de desenvolvimento.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Compila o aplicativo para produção.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm test`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Executa os testes.
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Expõe as configurações e scripts do create-react-app.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Configuração de ESLint
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+O ESLint é configurado com as regras padrão do create-react-app.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
