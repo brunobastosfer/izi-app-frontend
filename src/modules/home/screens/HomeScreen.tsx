@@ -1,8 +1,17 @@
+import CardComponent from "../../shared/components/Card";
+import Header from "../../shared/components/Header";
+import { useGlobalContext } from "../../shared/hooks/useGlobalContext";
+
 const HomeScreen: React.FC = () => {
+  const { globalData } = useGlobalContext();
+  console.log(globalData)
   return (
-    <div>
-      <h1>Home Screen</h1>
-    </div>
+    <>
+      <Header />
+      <div>
+        <CardComponent />
+      </div>
+    </>
   );
 }
 

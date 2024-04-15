@@ -8,6 +8,10 @@ import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import { Alert, Spin } from 'antd';
 import { instance } from "../../../utils/axios";
+import { useGlobalContext } from "../../shared/hooks/useGlobalContext";
+import { useRequest } from "../../shared/hooks/useRequest";
+import { AuthType } from "../types/AuthType";
+import { HomeRoutesEnum } from "../../home/routes/homeRoutes";
 
 interface FormComponentProps {
   toggleForm: () => void;
@@ -20,27 +24,25 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
   const [inputEmpty, setInputEmpty] = useState(false);
   const [runSpinner, setRunSpinner] = useState(false);
   const navigate = useNavigate();
+  const { authRequest } = useRequest();
+  const { setAcess, setUser } = useGlobalContext();
 
   const handleSignin = async (e: FormEvent) => {
     e.preventDefault();
-    setRunSpinner(true);
-    await instance.post('/users/auth', {
+    if(!email || !password) {
+      setInputEmpty(true)
+      setTimeout(() => {
+        setInputEmpty(false);
+      }, 1500)
+      return;
+    }
+    const user = await authRequest<AuthType>('/users/auth', {
       email,
       password
-    }).then((response) => {
-      localStorage.setItem('token', response.data.accessToken);
-      localStorage.setItem('refreshToken', response.data.refreshToken);
-      setRunSpinner(false);
-      navigate('/')
-    }).catch((error) => {
-      setRunSpinner(false);
-      Swal.fire({
-        title: 'Erro!',
-        text: error.response.data.message,
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      });
     });
+    setAcess(user);
+    setUser(user.user);
+    navigate(HomeRoutesEnum.HOME);
   }
 
   const handleSignup = async(e: FormEvent) => {

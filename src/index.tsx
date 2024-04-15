@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { loginRoutes } from './modules/login/routes/loginRoutes';
 import { homeScreens } from './modules/home/routes/homeRoutes';
+import { GlobalProvider } from './modules/shared/hooks/useGlobalContext';
 
 const router: RemixRouter = createBrowserRouter([...homeScreens, ...loginRoutes]);
 
@@ -14,7 +15,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+      <GlobalProvider>
+        <RouterProvider router={router} />
+      </GlobalProvider>
   </React.StrictMode>
 );
 
