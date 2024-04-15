@@ -56,7 +56,7 @@ const CardComponent: React.FC = () => {
           task?.map((item) => {
             if(item.finished === false)  {
               return (
-                <ItemsCardContent>
+                <ItemsCardContent key={item.id}>
                   <p>{item.name}</p>
                   <IconsCardContent>
                     <RightCircleOutlined style={{ cursor: "pointer" }} onClick={() => handleFinishTask(item.id, item)}/>
@@ -80,7 +80,7 @@ const CardComponent: React.FC = () => {
           task?.map((item) => {
             if(item.finished === true)  {
               return (
-                <ItemsCardContent>
+                <ItemsCardContent key={item.id}>
                   <TextFinishTask>{item.name}</TextFinishTask>
                   <IconsCardContent>
                     <LeftCircleOutlined style={{ marginLeft: "10px", cursor: "pointer"  }} onClick={() => handleTodoTask(item.id, item)}/>

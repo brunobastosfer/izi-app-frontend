@@ -17,6 +17,8 @@ interface GlobalContextProps {
   setUser: (user: Usuario) => void;
   task?: Task[];
   setTask?: (task: Task[]) => void;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (authenticated: boolean) => void;
 }
 
 const GlobalContext = createContext({} as GlobalContextProps);
@@ -29,6 +31,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [globalData, setGlobalData] = useState<GlobalData>({});
   const [user, setUser] = useState<Usuario>();
   const [task, setTask] = useState<Task[]>([]);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   if(!getItemStorage('accessToken') || !getItemStorage('refreshToken') || !getItemStorage('user') ) {
     setItemStorage('accessToken', globalData.accessToken || '');
     setItemStorage('refreshToken', globalData.refreshToken || '');
@@ -36,14 +39,14 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   }
 
   return (
-    <GlobalContext.Provider value={{ globalData, setGlobalData, user, setUser, task, setTask }}>
+    <GlobalContext.Provider value={{ globalData, setGlobalData, user, setUser, task, setTask, isAuthenticated, setIsAuthenticated }}>
       {children}
     </GlobalContext.Provider>
   )
 }
 
 export const useGlobalContext = () => {
-  const { globalData, setGlobalData, user, setUser, task, setTask } = useContext(GlobalContext);
+  const { globalData, setGlobalData, user, setUser, task, setTask, isAuthenticated, setIsAuthenticated } = useContext(GlobalContext);
 
   const setAcess = (auth: AuthType) => {
     setGlobalData({
@@ -60,6 +63,8 @@ export const useGlobalContext = () => {
     setUser,
     user,
     task,
-    setTask
+    setTask,
+    isAuthenticated,
+    setIsAuthenticated
   }
 }

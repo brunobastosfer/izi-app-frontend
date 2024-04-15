@@ -19,4 +19,5 @@ export const IconsCardContent = styled.div`
 
 export const TextFinishTask = styled.p`
   text-decoration: line-through;
+
 `

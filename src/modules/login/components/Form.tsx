@@ -25,7 +25,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
   const [runSpinner, setRunSpinner] = useState(false);
   const navigate = useNavigate();
   const { authRequest } = useRequest();
-  const { setAcess, setUser } = useGlobalContext();
+  const { setAcess, setUser, setIsAuthenticated } = useGlobalContext();
 
   const handleSignin = async (e: FormEvent) => {
     e.preventDefault();
@@ -40,7 +40,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
       email,
       password
     });
-    console.log("()=> USER", user);
+    setIsAuthenticated(true);
     setAcess(user);
     setUser(user.user);
     navigate(HomeRoutesEnum.HOME);

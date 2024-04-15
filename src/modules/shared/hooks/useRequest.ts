@@ -47,7 +47,6 @@ export const useRequest = () => {
   }
 
   const taskGetRequest = async <T>(url: string): Promise<T> => {
-    setLoading(true);
     const resultData = await axios({
       method: 'get',
       url: "http://localhost:3002" + url,
@@ -135,7 +134,7 @@ export const useRequest = () => {
     .catch((error) => {
       Swal.fire({
         title: 'Erro!',
-        text: error.response.data.message === "No token provided" ? "Faça login novamente" : error.response.data.message,
+        text: "Houve um erro. Faça login novamente",
         icon: 'error',
         confirmButtonText: 'Ok'
       })
