@@ -3,8 +3,6 @@ import Header from "../../shared/components/Header";
 import { useGlobalContext } from "../../shared/hooks/useGlobalContext";
 
 const HomeScreen: React.FC = () => {
-  const { globalData } = useGlobalContext();
-  console.log(globalData)
   return (
     <>
       <Header />

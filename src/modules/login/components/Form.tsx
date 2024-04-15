@@ -40,6 +40,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
       email,
       password
     });
+    console.log("()=> USER", user);
     setAcess(user);
     setUser(user.user);
     navigate(HomeRoutesEnum.HOME);
