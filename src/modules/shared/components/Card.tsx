@@ -10,9 +10,11 @@ import ModalComponent from './Modal';
 
 const CardComponent: React.FC = () => {
   const { taskGetRequest, taskPutRequest, taskDeleteRequest } = useRequest();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [shouldUpdate, setShouldUpdate] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolean>(false)
   const [task, setTask] = useState<Task[]>([]);
+  const [itemEdit, setItemEdit] = useState<Task>({} as Task);
   const user = getItemStorage('user');
   const { width } = useWindowSize();
 
@@ -47,6 +49,12 @@ const CardComponent: React.FC = () => {
     setShouldUpdate(true);
   }
 
+  const handleEdit = (item: Task) => {
+    setEdit(true);
+    setOpen(true);
+    setItemEdit(item)
+  }
+
   return (
     <Row gutter={20} style={{ margin: 0, display: "flex", alignItems: "center", justifyContent: "center", height: "calc(100vh - 72px)", width: "auto",backgroundImage:"linear-gradient(180deg, #0573B1 0%, #10A3E7 100%)"}}>
       <Col span={width >= 580 ? 8 : 16}>
@@ -61,7 +69,7 @@ const CardComponent: React.FC = () => {
                   <IconsCardContent>
                     <RightCircleOutlined style={{ cursor: "pointer" }} onClick={() => handleFinishTask(item.id, item)}/>
                     <DeleteOutlined style={{ marginLeft: "10px", cursor: "pointer" }} onClick={() => handleDelete(item.id)}/>
-                    <EditOutlined style={{ marginLeft: "10px", cursor: "pointer" }}/>
+                    <EditOutlined style={{ marginLeft: "10px", cursor: "pointer" }} onClick={() => handleEdit(item)}/>
                   </IconsCardContent>
                 </ItemsCardContent>
               )
@@ -99,7 +107,15 @@ const CardComponent: React.FC = () => {
       <FloatButton icon={<PlusCircleOutlined />} onClick={() => setOpen(!open)}/>
       {
         open &&
-        <ModalComponent open={open} setOpen={setOpen} setShouldUpdate={setShouldUpdate}/>
+        <ModalComponent 
+          open={open}
+          setOpen={setOpen}
+          setShouldUpdate={setShouldUpdate}
+          edit={edit}
+          itemEdit={itemEdit}
+          setEdit={setEdit}
+          setItemEdit={setItemEdit}
+        />
       }
     </Row>
   )

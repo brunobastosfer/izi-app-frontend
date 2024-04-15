@@ -46,12 +46,28 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
     navigate(HomeRoutesEnum.HOME);
   }
 
+  const isValidEmail = (email: string) => {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+
+
   const handleSignup = async(e: FormEvent) => {
     e.preventDefault();
+    if(!isValidEmail(email)) {
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Email inválido.',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+      return;
+    }
     instance.post('/users', {
       email,
       password
     }).then((response) => {
+      toggleForm();
       Swal.fire({
         title: 'Sucesso!',
         text: 'Usuário cadastrado com sucesso!',
@@ -68,13 +84,10 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
     });
   }
 
-  const handleForgetPassword = () => {
-  }
-
   return (
     <LoginForm>
       <Space direction="vertical">
-        <Input style={{ marginBottom: !inputEmpty ? 10 : 0}} size="large" placeholder="Email" prefix={<UserOutlined />} onChange={ (e) => setEmail(e.target.value) }/>
+        <Input type="email" style={{ marginBottom: !inputEmpty ? 10 : 0}} size="large" placeholder="Email" prefix={<UserOutlined />} onChange={ (e) => setEmail(e.target.value) }/>
         {
           inputEmpty && !email && (
             <Alert message="O usuário é obrigatório." type="error" style={{ border: "none", background: "none" }}/>
@@ -96,16 +109,11 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
         }
       </Space>
       {
-        !isRegisterForm && (
-          <ForgetPassword onClick={handleForgetPassword}>Esqueci minha senha</ForgetPassword>
-        )
-      }
-      {
         isRegisterForm 
         ?
           <Button style={{ width: "60%", marginTop: "10px" }} onClick={ handleSignup } formMethod='submit' type='primary' size='large'>Cadastrar</Button>
         :
-          <Button style={{ width: "60%" }} onClick={ handleSignin } formMethod='submit' type='primary' size='large'>Entrar</Button> 
+          <Button style={{ width: "60%", marginTop: "10px" }} onClick={ handleSignin } formMethod='submit' type='primary' size='large'>Entrar</Button> 
       }
       {
         !isRegisterForm && (

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const ContainerMain = styled.div`
-  /* display: flex; */
   height: 100vh;
 `;
 
@@ -11,14 +10,13 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   justify-content: center;
+  width: auto;
 `;
 
 export const ForgetPassword = styled.p`
   text-decoration: underline;
   color: #6d9bf9;
-  margin-left: 5px;
   text-align: left;
-  width: 100%;
   cursor: pointer;
 `
 
@@ -37,7 +35,6 @@ export const BackgroundImageContainer = styled.div`
   align-items: center;
   height: 100vh;
   background-image: linear-gradient(180deg, #0573B1 0%, #10A3E7 100%);
-  border: 1px solid orange;
   
 
   @media (max-width: 781px) {
