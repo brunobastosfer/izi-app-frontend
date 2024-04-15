@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@custom-react-hooks/use-window-size": "^1.4.19",
     "@remix-run/router": "^1.15.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -18,6 +19,7 @@
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
     "styled-components": "^6.1.8",
+    "sweetalert2": "^11.10.7",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
