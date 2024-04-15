@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import type { Router as RemixRouter } from '@remix-run/router';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { loginRoutes } from './modules/login/routes/loginRoutes';
-import GlobalStyles from './global.style';
+import { homeScreens } from './modules/home/routes/homeRoutes';
 
-const router: RemixRouter = createBrowserRouter([...loginRoutes]);
+const router: RemixRouter = createBrowserRouter([...homeScreens, ...loginRoutes]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
