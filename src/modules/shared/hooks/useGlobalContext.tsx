@@ -1,7 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import { Usuario } from "../../login/types/Usuario";
-import { setItemStorage } from "../functions/storageProxy";
+import { getItemStorage, setItemStorage } from "../functions/storageProxy";
 import { AuthType } from "../../login/types/AuthType";
+import { Task } from "../../home/types/Task";
 
 interface GlobalData {
   accessToken?: string;
@@ -12,6 +13,12 @@ interface GlobalData {
 interface GlobalContextProps {
   globalData: GlobalData;
   setGlobalData: (globalData: GlobalData) => void;
+  user: Usuario | undefined;
+  setUser: (user: Usuario) => void;
+  task?: Task[];
+  setTask?: (task: Task[]) => void;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (authenticated: boolean) => void;
 }
 
 const GlobalContext = createContext({} as GlobalContextProps);
@@ -22,36 +29,42 @@ interface GlobalProviderProps {
 
 export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [globalData, setGlobalData] = useState<GlobalData>({});
-  setItemStorage('accessToken', globalData.accessToken || '');
-  setItemStorage('refreshToken', globalData.refreshToken || '');
+  const [user, setUser] = useState<Usuario>();
+  const [task, setTask] = useState<Task[]>([]);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  if(!getItemStorage('accessToken') || !getItemStorage('refreshToken') || !getItemStorage('user') ) {
+    setItemStorage('accessToken', globalData.accessToken || '');
+    setItemStorage('refreshToken', globalData.refreshToken || '');
+    setItemStorage('user', user?.id || '');
+  }
 
   return (
-    <GlobalContext.Provider value={{ globalData, setGlobalData }}>
+    <GlobalContext.Provider value={{ globalData, setGlobalData, user, setUser, task, setTask, isAuthenticated, setIsAuthenticated }}>
       {children}
     </GlobalContext.Provider>
   )
 }
 
 export const useGlobalContext = () => {
-  const { globalData, setGlobalData } = useContext(GlobalContext);
+  const { globalData, setGlobalData, user, setUser, task, setTask, isAuthenticated, setIsAuthenticated } = useContext(GlobalContext);
 
   const setAcess = (auth: AuthType) => {
-    setGlobalData(auth);
+    setGlobalData({
+      ...globalData,
+      accessToken: auth.accessToken,
+      refreshToken: auth.refreshToken
+    });
   }
-
-  const setUser = (user: Usuario) => {
-    console.log(user)
-    setGlobalData({ ...globalData, user });
-    console.log(globalData)
-  }
-
-  const user = () => globalData.user;
 
 
   return {
     globalData,
     setAcess,
     setUser,
-    user
+    user,
+    task,
+    setTask,
+    isAuthenticated,
+    setIsAuthenticated
   }
 }

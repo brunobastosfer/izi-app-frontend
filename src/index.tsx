@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { loginRoutes } from './modules/login/routes/loginRoutes';
 import { homeScreens } from './modules/home/routes/homeRoutes';
 import { GlobalProvider } from './modules/shared/hooks/useGlobalContext';
+import GlobalStyle from './global.style';
 
 const router: RemixRouter = createBrowserRouter([...homeScreens, ...loginRoutes]);
 
@@ -16,6 +17,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
       <GlobalProvider>
+        <GlobalStyle />
         <RouterProvider router={router} />
       </GlobalProvider>
   </React.StrictMode>
