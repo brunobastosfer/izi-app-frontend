@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export const useRequest = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const getRequest = async (url: string) => {
     setLoading(true);
@@ -58,6 +60,10 @@ export const useRequest = () => {
       return response.data;
     })
     .catch((error) => {
+      if(error.response.data.message === "token inválido") {
+        navigate('/login')
+        return ;
+      }
       Swal.fire({
         title: 'Erro!',
         text: error.response.data.message,
